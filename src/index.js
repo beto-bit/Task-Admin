@@ -24,6 +24,11 @@ app.on('ready', () => {
   // Navegación
   const mainMenu = Menu.buildFromTemplate(templateMenu);
   Menu.setApplicationMenu(mainMenu);
+
+  // Evento de Cierre
+  mainWindow.on('closed', () => {
+    app.quit();
+  });
 });
 
 // NUEVA Ventana
@@ -32,11 +37,21 @@ function createNewProductWindow() {
   newTaskWindow = new BrowserWindow ({
     width: 500,
     height: 330,
-    title: 'Nueva Tarea'
+    title: 'Nueva Tarea',
+    // parent: mainWindow
+    // TODO Si se puede investigar que onda con lo de arriba y todo eso :p
   });
+
+  newTaskWindow.setMenu(null)
 
   // Cargar el HTML
   newTaskWindow.loadURL(`file://${__dirname}/views/new-task.html`);
+
+  /* No creo que sea necesario TODO (eliminarlo si no es necesario)
+  newTaskWindow.on('closed', () => {
+    newTaskWindow = null;
+  });
+  */
 }
 
 // Navegación
