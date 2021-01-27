@@ -1,12 +1,6 @@
 const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 
-// Hot reload
-if (process.env.NODE_ENV !== 'production') {
-  require('electron-reload')(__dirname, {
-    electron: path.join(__dirname, '../node-modules', '.bin', 'electron')
-  });
-}
 
 // Variables
 let mainWindow;
@@ -17,6 +11,8 @@ let newTaskWindow;
 app.on('ready', () => {
   // Inicializar
   mainWindow = new BrowserWindow({});
+
+  // TODO: cuando carga el asunto meter ese código que hace que sea mas mejor xd
 
   // HTML
   mainWindow.loadURL(`file://${__dirname}/views/index.html`);
@@ -30,6 +26,7 @@ app.on('ready', () => {
     app.quit();
   });
 });
+
 
 // NUEVA Ventana
 function createNewProductWindow() {
@@ -54,6 +51,7 @@ function createNewProductWindow() {
   */
 }
 
+
 // Navegación
 const templateMenu = [
   // File
@@ -70,7 +68,7 @@ const templateMenu = [
       }, // TODO: poner el borrón de Unde y Redo antes que el de 'Remover Todo'
 
       { type: 'separator' },
-
+      
       // Salida
       {
         label: 'Salir',
@@ -82,3 +80,33 @@ const templateMenu = [
     ]
   }
 ];
+
+
+// Hot reload
+if (process.env.NODE_ENV !== 'production') {
+  require('electron-reload')(__dirname, {
+    electron: path.join(__dirname, '../node-modules', '.bin', 'electron')
+  });
+}
+
+// DevTools
+if (process.env.NODE_ENV !== 'production') {
+  templateMenu.push({
+    label: 'DevTools',
+    submenu: [
+      // Toggle DevTools
+      {
+        label: 'Show/Hide',
+        accelerator: 'Ctrl+I',
+        click(item, focusedWindows) {
+          focusedWindows.toggleDevTools();
+        }
+      },
+
+      // Reload
+      {
+        role: 'reload'
+      }
+    ]
+  })
+}
