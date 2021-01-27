@@ -39,7 +39,7 @@ function createNewProductWindow() {
     height: 330,
     title: 'Nueva Tarea',
     // parent: mainWindow
-    // TODO Si se puede investigar que onda con lo de arriba y todo eso :p
+    // TODO Si se puede investigar que onda con lo de arriba y eso :p
   });
 
   newTaskWindow.setMenu(null)
@@ -66,6 +66,17 @@ const templateMenu = [
         accelerator: 'Ctrl+N',
         click() {
           createNewProductWindow();
+        }
+      }, // TODO: poner el borrón de Unde y Redo antes que el de 'Remover Todo'
+
+      { type: 'separator' },
+
+      // Salida
+      {
+        label: 'Salir',
+        accelerator: 'Ctrl+Q',
+        click() {
+          app.quit();
         }
       }
     ]
