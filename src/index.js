@@ -35,12 +35,14 @@ function createNewProductWindow() {
   // Inicializar
   newTaskWindow = new BrowserWindow ({
     width: 400,
-    height: 430,
+    height: 445, // TODO esto luego ponerlo a 430
+    webPreferences: { nodeIntegration: true },
     // parent: mainWindow
     // TODO Si se puede investigar que onda con lo de arriba y eso :p
   });
 
-  newTaskWindow.setMenu(null)
+  // TODO decomentar esto
+  // newTaskWindow.setMenu(null)
 
   // Cargar el HTML
   newTaskWindow.loadURL(`file://${__dirname}/views/new-task.html`);
@@ -66,7 +68,7 @@ const templateMenu = [
         click() {
           createNewProductWindow();
         }
-      }, // TODO: poner el borrón de Unde y Redo antes que el de 'Remover Todo'
+      }, // TODO: poner el borrón de Unde y Redo antes que el de 'Remover Tod0'
 
       { type: 'separator' },
       

@@ -15,7 +15,7 @@
 
     <!--Materia-->
     <div class="form-group">
-      <input type="text" id="price" class="form-control" placeholder="Materia">
+      <input type="text" id="subject" class="form-control" placeholder="Materia">
     </div>
 
     <!--Descripción-->
@@ -25,7 +25,7 @@
 
     <!--Fecha-->
     <div class="form-group">
-      <input type="datetime-local" class="form-control">
+      <input type="datetime-local" id="date" class="form-control">
     </div>
 
     <!--Aceptar-->
@@ -35,12 +35,41 @@
   </form>
 
   <script>
+    const { ipcRenderer } = require('electron');
+
     const form = document.querySelector('form');
     addEventListener('submit', e => {
-      console.log(e);
+      // Esta wea es para convertir de datetime-local a date :p
+      function convertDateType(date) {
+        let year = date.slice(0, 4);
+        let month = date.slice(5, 7) - 1;
+        let day = date.slice(8, 10);
+        let hour = date.slice(11, 13);
+        let minute = date.slice(14, 16);  
+
+        let actualDate = new Date(year, month, day, hour, minute);
+        return actualDate;
+      }
+
+      const nameTask = document.querySelector('#name').value;
+      const subjTask = document.querySelector('#subject').value;
+      const descTask = document.querySelector('#description').value;
+      const dateTask = convertDateType(document.querySelector('#date').value);
+
+      const newTask = {
+        nameTask,
+        subjTask,
+        descTask,
+        dateTask
+      }
+
+      console.log(dateTask);
+      console.log(newTask.dateTask);
+
+      // ipcRenderer.send('task:new', )
 
       e.preventDefault();
-    })
+    });
 
   </script>
   
