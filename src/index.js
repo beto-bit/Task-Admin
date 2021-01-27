@@ -11,6 +11,7 @@ let newTaskWindow;
 app.on('ready', () => {
   // Inicializar
   mainWindow = new BrowserWindow({
+    icon: path.join(__dirname, '/icons/icon.png'),
     show: false,
     webPreferences: { nodeIntegration: true }
   });
