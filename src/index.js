@@ -10,7 +10,9 @@ let newTaskWindow;
 // Ventana PRINCIPAL 
 app.on('ready', () => {
   // Inicializar
-  mainWindow = new BrowserWindow({});
+  mainWindow = new BrowserWindow({
+    webPreferences: { nodeIntegration: true }
+  });
 
   // TODO: cuando carga el asunto meter ese código que hace que sea mas mejor xd
 
@@ -34,7 +36,6 @@ function createNewProductWindow() {
   newTaskWindow = new BrowserWindow ({
     width: 500,
     height: 330,
-    title: 'Nueva Tarea',
     // parent: mainWindow
     // TODO Si se puede investigar que onda con lo de arriba y eso :p
   });
