@@ -39,14 +39,16 @@
 
     const form = document.querySelector('form');
     addEventListener('submit', e => {
-      // Esta wea es para convertir de datetime-local a date :p
+      /* Esta wea es para convertir de datetime-local a date :p
+       además de generar un objeto, con los datos originales
+       y los datos en formato Date */
       function convertDateType(date) {
         let year = date.slice(0, 4);
         let month = date.slice(5, 7) - 1;
         let day = date.slice(8, 10);
         let hour = date.slice(11, 13);
-        let minute = date.slice(14, 16);  
-
+        let minute = date.slice(14, 16); 
+         
         let actualDate = new Date(year, month, day, hour, minute);
         return actualDate;
       }
@@ -57,10 +59,10 @@
       const dateTask = convertDateType(document.querySelector('#date').value);
 
       const newTask = {
-        nameTask,
-        subjTask,
-        descTask,
-        dateTask
+        name: nameTask,
+        subject: subjTask,
+        description: descTask,
+        date: dateTask
       }
 
       ipcRenderer.send('task:new', newTask);

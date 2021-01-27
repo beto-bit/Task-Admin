@@ -16,8 +16,135 @@
 
     const tasks = document.querySelector('#tasks');
 
+    // Día en Español
+    function day(num) {
+      switch (num) {
+        case 0:
+          return 'Domingo'
+          break;
+
+        case 1:
+          return 'Lunes'
+          break;
+
+        case 2:
+          return 'Martes'
+          break;
+
+        case 3:
+          return 'Miércoles'
+          break;
+
+        case 4:
+          return 'Jueves'
+          break;
+
+        case 5:
+          return 'Viernes'
+          break;
+
+        case 6:
+          return 'Sábado'
+          break;
+      
+        default:
+          break;
+      }
+    }
+
+    // Mes
+    function month(num) {
+      switch (num) {
+        case 0:
+          return 'Enero'
+          break;
+
+        case 1:
+          return 'Febrero'
+          break;
+
+        case 2:
+          return 'Marzo'
+          break;
+
+        case 3:
+          return 'Abril'
+          break;
+
+        case 4:
+          return 'Mayo'
+          break;
+
+        case 5:
+          return 'Junio'
+          break;
+
+        case 6:
+          return 'Julio'
+          break;
+
+        case 7:
+          return 'Agosto'
+          break;
+
+        case 8:
+          return 'Septiembre'
+          break;
+
+        case 9:
+          return 'Octubre'
+          break;
+
+        case 10:
+          return 'Noviembre'
+          break;
+
+        case 11:
+          return 'Diciembre'
+          break;
+      
+        default:
+          break;
+      }
+    }
+
     ipcRenderer.on('new:task', (e, newTask) => {
-      console.log(newTask);
+      const presentableDate = `${day(newTask.date.getDay())}, ${newTask.date.getDate()} de ${month(newTask.date.getMonth())} de ${newTask.date.getFullYear()}`;
+
+      // Plantilla para Producto
+      const newProductTemplate = `
+        <div class="p-2">
+        <div class="card text-center p-1">
+            <div class="card-header">
+              <h5 class="card-title">${newTask.name}</h5>
+            </div>
+            <div class="card-body">
+              ${newTask.subject}
+              <hr>
+              ${newTask.description}
+              <hr>
+              ${presentableDate}
+              <hr>
+              ${newTask.date.getHours()}:${newTask.date.getMinutes()}
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-danger btn-sm">
+                BORRAR
+              </button>
+            </div>
+        </div>
+        </div>
+      `;
+
+      tasks.innerHTML += newProductTemplate;
+
+      // Borrar
+      const btns = document.querySelectorAll('.btn.btn-danger');
+      btns.forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.target.parentElement.parentElement.parentElement.remove();
+        });
+      });
     });
 
   </script>
