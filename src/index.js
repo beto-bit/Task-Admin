@@ -35,7 +35,7 @@ function createNewProductWindow() {
   // Inicializar
   newTaskWindow = new BrowserWindow ({
     width: 400,
-    height: 380,
+    height: 430,
     // parent: mainWindow
     // TODO Si se puede investigar que onda con lo de arriba y eso :p
   });

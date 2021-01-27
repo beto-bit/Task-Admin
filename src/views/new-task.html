@@ -28,8 +28,21 @@
       <input type="datetime-local" class="form-control">
     </div>
 
-
+    <!--Aceptar-->
+    <button class="btn btn-primary btn-block">
+      Guardar Tareas
+    </button>
   </form>
+
+  <script>
+    const form = document.querySelector('form');
+    addEventListener('submit', e => {
+      console.log(e);
+
+      e.preventDefault();
+    })
+
+  </script>
   
 </body>
 </html>
