@@ -109,7 +109,7 @@
     }
 
     ipcRenderer.on('new:task', (e, newTask) => {
-      const presentableDate = `${day(newTask.date.getDay())}, ${newTask.date.getDate()} de ${month(newTask.date.getMonth())} de ${newTask.date.getFullYear()}`;
+      const presentableDate = `${newTask.date.getDate()} de ${month(newTask.date.getMonth())} de ${newTask.date.getFullYear()}`;
 
       // Plantilla para Producto
       const newProductTemplate = `
@@ -125,7 +125,7 @@
               <hr>
               ${presentableDate}
               <hr>
-              ${newTask.date.getHours()}:${newTask.date.getMinutes()}
+              ${day(newTask.date.getDay())} ${newTask.date.getHours()}:${newTask.date.getMinutes()}
             </div>
             <div class="card-footer">
               <button class="btn btn-danger btn-sm">
