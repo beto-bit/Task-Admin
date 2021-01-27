@@ -108,11 +108,12 @@
       }
     }
 
+    // Recibir información
     ipcRenderer.on('new:task', (e, newTask) => {
       const presentableDate = `${newTask.date.getDate()} de ${month(newTask.date.getMonth())} de ${newTask.date.getFullYear()}`;
 
-      // Plantilla para Producto
-      const newProductTemplate = `
+      // Plantilla para Tarea
+      const newTaskTemplate = `
         <div class="p-2">
         <div class="card text-center p-1">
             <div class="card-header">
@@ -136,7 +137,7 @@
         </div>
       `;
 
-      tasks.innerHTML += newProductTemplate;
+      tasks.innerHTML += newTaskTemplate;
 
       // Borrar
       const btns = document.querySelectorAll('.btn.btn-danger');

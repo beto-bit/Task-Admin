@@ -11,10 +11,9 @@ let newTaskWindow;
 app.on('ready', () => {
   // Inicializar
   mainWindow = new BrowserWindow({
+    show: false,
     webPreferences: { nodeIntegration: true }
   });
-
-  // TODO: cuando carga el asunto meter ese código que hace que sea mas mejor xd
 
   // HTML
   mainWindow.loadURL(`file://${__dirname}/views/index.html`);
@@ -22,6 +21,11 @@ app.on('ready', () => {
   // Navegación
   const mainMenu = Menu.buildFromTemplate(templateMenu);
   Menu.setApplicationMenu(mainMenu);
+
+  // Mostrar
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
+  });
 
   // Evento de Cierre
   mainWindow.on('closed', () => {
@@ -31,27 +35,28 @@ app.on('ready', () => {
 
 
 // NUEVA Ventana
-function createNewProductWindow() {
+function createNewTaskWindow() {
   // Inicializar
   newTaskWindow = new BrowserWindow ({
     width: 400,
-    height: 445, // TODO esto luego ponerlo a 430
-    webPreferences: { nodeIntegration: true },
-    // parent: mainWindow
-    // TODO Si se puede investigar que onda con lo de arriba y eso :p
+    height: 430, 
+    show: false,
+    parent: mainWindow,
+    resizable: false,
+    minimizable: false,
+    webPreferences: { nodeIntegration: true }
   });
-
-  // TODO decomentar esto
-  // newTaskWindow.setMenu(null)
+  
+  // Sin navegación
+  newTaskWindow.setMenu(null)
 
   // Cargar el HTML
   newTaskWindow.loadURL(`file://${__dirname}/views/new-task.html`);
 
-  /* No creo que sea necesario TODO (eliminarlo si no es necesario)
-  newTaskWindow.on('closed', () => {
-    newTaskWindow = null;
+  // Cargar cuando esté lista
+  newTaskWindow.once('ready-to-show', () => {
+    newTaskWindow.show()
   });
-  */
 }
 
 
@@ -73,7 +78,7 @@ const templateMenu = [
         label: 'Nueva Tarea',
         accelerator: 'Ctrl+N',
         click() {
-          createNewProductWindow();
+          createNewTaskWindow();
         }
       }, // TODO: poner el borrón de Unde y Redo antes que el de 'Remover Tod0'
 
