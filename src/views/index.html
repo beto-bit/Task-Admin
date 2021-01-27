@@ -12,9 +12,13 @@
   </div>
 
   <script>
-    // const electron = require('electron');
+    const { ipcRenderer } = require('electron');
 
     const tasks = document.querySelector('#tasks');
+
+    ipcRenderer.on('new:task', (e, newTask) => {
+      console.log(newTask);
+    });
 
   </script>
 

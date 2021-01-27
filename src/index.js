@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const path = require('path');
 
 
@@ -53,6 +53,13 @@ function createNewProductWindow() {
   });
   */
 }
+
+
+// Recibir Información
+ipcMain.on('task:new', (e, newTask) => {
+  mainWindow.webContents.send('new:task', newTask);
+  newTaskWindow.close();
+});
 
 
 // Navegación

@@ -63,10 +63,7 @@
         dateTask
       }
 
-      console.log(dateTask);
-      console.log(newTask.dateTask);
-
-      // ipcRenderer.send('task:new', )
+      ipcRenderer.send('task:new', newTask);
 
       e.preventDefault();
     });
