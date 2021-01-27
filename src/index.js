@@ -34,8 +34,8 @@ app.on('ready', () => {
 function createNewProductWindow() {
   // Inicializar
   newTaskWindow = new BrowserWindow ({
-    width: 500,
-    height: 330,
+    width: 400,
+    height: 380,
     // parent: mainWindow
     // TODO Si se puede investigar que onda con lo de arriba y eso :p
   });
