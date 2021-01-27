@@ -7,6 +7,13 @@ hacer tu *Pull Request* y la estaré leyendo. Este es un proyecto Open Source pr
 # ⚙ Funcionamiento
 Para el funcionamiento de este programa me basé fuertemente en el tutorial de [Fazt Web](https://faztweb.com/), utiliza Node Js y Electron.
 
+Para iniciar el proyecto en tu ordenador tienes que tener [Node](https://nodejs.org/es/) instalado. 
+1. Abre el proyecto desde consola
+2. Ejecuta el comando ```npm install```
+3. Ahora ejecuta el comando ```npm start```
+
+Eventualmente saldrá la versión distribuible, si quieres ver como hacerlo tú mismo puedes visitar [esto](https://www.npmjs.com/package/electron-packager).
+
 # 🖼 Imágenes
 ### Vista Principal
 ![Imágen de la Main Window](https://github.com/beto-bit/Task-Admin/blob/main/gh-images/mainwindow.png)
