@@ -3,14 +3,14 @@ const Store = require('electron-store');
 const path = require('path');
 
 
-// Variables
+// Ventanas
 let mainWindow;
 let newTaskWindow;
+let storeDataWindow;
 
 
-// Ventana PRINCIPAL 
-app.on('ready', () => {
-  // Inicializar
+// VENTANA PRINCIPAL
+function createMainWindow() {
   mainWindow = new BrowserWindow({
     icon: path.join(__dirname, '/icons/icon.png'),
     show: false,
@@ -26,14 +26,14 @@ app.on('ready', () => {
 
   // Mostrar
   mainWindow.once('ready-to-show', () => {
-    mainWindow.show()
+    mainWindow.show();
   });
 
   // Evento de Cierre
   mainWindow.on('closed', () => {
     app.quit();
   });
-});
+}
 
 
 // NUEVA Ventana
@@ -62,7 +62,14 @@ function createNewTaskWindow() {
 }
 
 
-// Recibir Información
+// Inicializar VENTANA PRINCIPAL
+app.on('ready', () => {
+  createMainWindow();
+});
+
+
+
+// Recibir y Enviar Información
 ipcMain.on('task:new', (e, newTask) => {
   mainWindow.webContents.send('new:task', newTask);
   newTaskWindow.close();
