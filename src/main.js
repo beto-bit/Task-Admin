@@ -6,11 +6,11 @@ const path = require('path');
 // Ventanas
 let mainWindow;
 let newTaskWindow;
-let storeDataWindow;
 
 
 // VENTANA PRINCIPAL
 function createMainWindow() {
+  // Propiedades
   mainWindow = new BrowserWindow({
     icon: path.join(__dirname, '/icons/icon.png'),
     show: false,
@@ -36,9 +36,9 @@ function createMainWindow() {
 }
 
 
-// NUEVA Ventana
+// Ventana de NUEVA TAREA
 function createNewTaskWindow() {
-  // Inicializar
+  // Propiedades
   newTaskWindow = new BrowserWindow ({
     width: 400,
     height: 430, 
@@ -68,9 +68,9 @@ app.on('ready', () => {
 });
 
 
-
 // Recibir y Enviar Información
 ipcMain.on('task:new', (e, newTask) => {
+  // Enviar a index.html
   mainWindow.webContents.send('new:task', newTask);
   newTaskWindow.close();
 });
