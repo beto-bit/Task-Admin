@@ -12,6 +12,15 @@ let store = new Store({
 });
 store.path = path.join(__dirname, '/data/data.json');
 
+// Función de ID
+function nextId() {
+  store.set('counter', store.get('counter') + 1);
+  if (store.get('counter') === null) {
+    store.set('counter', 0);
+  }
+  return store.get('counter');
+}
+
 
 // Ventanas
 let mainWindow;
@@ -85,7 +94,8 @@ ipcMain.on('task:new', (e, newTask) => {
   newTaskWindow.close();
 
   // Guardar Datos
-  store.set('xd', newTask);
+  let ID = nextId().toString();
+  store.set(ID, newTask);
 });
 
 
@@ -144,6 +154,15 @@ if (process.env.NODE_ENV !== 'production') {
       // Reload
       {
         role: 'reload'
+      },
+
+      // Reset Data
+      {
+        label: 'Reset Data',
+        accelerator: 'Ctrl+W',
+        click() {
+          store.clear();
+        }
       }
     ]
   })
