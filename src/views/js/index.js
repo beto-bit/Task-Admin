@@ -1,6 +1,23 @@
-const { ipcRenderer } = require('electron');
 const tasks = document.querySelector('#tasks');
+const { ipcRenderer } = require('electron');
+const Store = require('electron-store');
+const path = require('path');
 
+// Inicializar Store y Obtener Datos
+let store = new Store();
+store.path = path.join(__dirname, '../data/data.json');
+let storedTasks = store.get('tasks');
+
+
+// Cambiar formato de Fecha
+for (let stored in storedTasks) {
+  storedTasks[stored].date = new Date(storedTasks[stored].date);
+}
+
+// Crear Tarjetas HTML
+for (const stored in storedTasks) {
+  tasks.innerHTML += newTaskTemplate(storedTasks[stored]);
+}
 
 
 // Recibir información
@@ -10,17 +27,18 @@ ipcRenderer.on('new:task', (e, newTask) => {
 
   tasks.innerHTML += taskTemplate;
 
-  // Borrar
-  const btns = document.querySelectorAll('.btn.btn-danger');
-  btns.forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.target.parentElement.parentElement.parentElement.remove();
-    });
+});
+
+// Borrar
+const btns = document.querySelectorAll('.btn.btn-danger');
+btns.forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.target.parentElement.parentElement.parentElement.remove();
   });
 });
 
-
 // Tarjeta HTML
+
 function newTaskTemplate(newTask) {
   let presentableDate = `${newTask.date.getDate()} de ${month(newTask.date.getMonth())} de ${newTask.date.getFullYear()}`;
 

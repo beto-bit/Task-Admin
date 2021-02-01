@@ -3,6 +3,7 @@ const Store = require('electron-store');
 const path = require('path');
 
 // Inicializar Store
+Store.initRenderer(); 
 let store = new Store({
   counter: {
     type: 'number',
