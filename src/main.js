@@ -2,6 +2,16 @@ const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const Store = require('electron-store');
 const path = require('path');
 
+// Inicializar Store
+let store = new Store({
+  counter: {
+    type: 'number',
+    minimum: 0,
+    default: 0
+  }
+});
+store.path = path.join(__dirname, '/data/data.json');
+
 
 // Ventanas
 let mainWindow;
@@ -73,6 +83,9 @@ ipcMain.on('task:new', (e, newTask) => {
   // Enviar a index.html
   mainWindow.webContents.send('new:task', newTask);
   newTaskWindow.close();
+
+  // Guardar Datos
+  store.set('xd', newTask);
 });
 
 
@@ -109,7 +122,8 @@ const templateMenu = [
 // Hot reload
 if (process.env.NODE_ENV !== 'production') {
   require('electron-reload')(__dirname, {
-    electron: path.join(__dirname, '../node-modules', '.bin', 'electron')
+    electron: path.join(__dirname, '../node-modules', '.bin', 'electron'),
+    ignored: /data\/|[/\\]\./ // Archivos de Guardado
   });
 }
 
