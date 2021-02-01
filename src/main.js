@@ -12,6 +12,7 @@ let store = new Store({
 });
 store.path = path.join(__dirname, '/data/data.json');
 
+
 // Función de ID
 function nextId() {
   store.set('counter', store.get('counter') + 1);
@@ -95,7 +96,7 @@ ipcMain.on('task:new', (e, newTask) => {
 
   // Guardar Datos
   let ID = nextId().toString();
-  store.set(ID, newTask);
+  store.set(`tasks.${ID}`, newTask);
 });
 
 
