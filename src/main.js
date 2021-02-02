@@ -1,15 +1,37 @@
 const { app, BrowserWindow, Menu, ipcMain } = require('electron');
+const Store = require('electron-store');
 const path = require('path');
 
+// Inicializar Store
+Store.initRenderer(); 
+let store = new Store({
+  counter: {
+    type: 'number',
+    minimum: 0,
+    default: 0
+  }
+});
+store.path = path.join(__dirname, '/data/data.json');
 
-// Variables
+
+// Función de ID
+function nextId() {
+  store.set('counter', store.get('counter') + 1);
+  if (store.get('counter') === null) {
+    store.set('counter', 0);
+  }
+  return store.get('counter');
+}
+
+
+// Ventanas
 let mainWindow;
 let newTaskWindow;
 
 
-// Ventana PRINCIPAL 
-app.on('ready', () => {
-  // Inicializar
+// VENTANA PRINCIPAL
+function createMainWindow() {
+  // Propiedades
   mainWindow = new BrowserWindow({
     icon: path.join(__dirname, '/icons/icon.png'),
     show: false,
@@ -25,19 +47,19 @@ app.on('ready', () => {
 
   // Mostrar
   mainWindow.once('ready-to-show', () => {
-    mainWindow.show()
+    mainWindow.show();
   });
 
   // Evento de Cierre
   mainWindow.on('closed', () => {
     app.quit();
   });
-});
+}
 
 
-// NUEVA Ventana
+// Ventana de NUEVA TAREA
 function createNewTaskWindow() {
-  // Inicializar
+  // Propiedades
   newTaskWindow = new BrowserWindow ({
     width: 400,
     height: 430, 
@@ -61,10 +83,23 @@ function createNewTaskWindow() {
 }
 
 
-// Recibir Información
-ipcMain.on('task:new', (e, newTask) => {
+// Inicializar VENTANA PRINCIPAL
+app.on('ready', () => {
+  createMainWindow();
+});
+
+
+// Manejo de DATOS
+ipcMain.on('task:new', (e, newTask) => {  
+  // Guardar Datos
+  let ID = nextId().toString();
+  newTask.id = ID;
+  store.set(`tasks.${ID}`, newTask);
+
+  // Enviar a index.html
   mainWindow.webContents.send('new:task', newTask);
   newTaskWindow.close();
+
 });
 
 
@@ -101,7 +136,8 @@ const templateMenu = [
 // Hot reload
 if (process.env.NODE_ENV !== 'production') {
   require('electron-reload')(__dirname, {
-    electron: path.join(__dirname, '../node-modules', '.bin', 'electron')
+    electron: path.join(__dirname, '../node-modules', '.bin', 'electron'),
+    ignored: /data\/|[/\\]\./ // Archivos de Guardado
   });
 }
 
@@ -122,6 +158,15 @@ if (process.env.NODE_ENV !== 'production') {
       // Reload
       {
         role: 'reload'
+      },
+
+      // Reset Data
+      {
+        label: 'Reset Data',
+        accelerator: 'Ctrl+W',
+        click() {
+          store.clear();
+        }
       }
     ]
   })

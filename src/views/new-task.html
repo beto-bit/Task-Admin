@@ -3,7 +3,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nueva Tarea</title>
-  <link rel="stylesheet" href="styles/light-theme.css">
+
+  <!--LINKS-->
+  <script defer src="js/new-task.js"></script>
+  <link rel="stylesheet" href="css/light-theme.css">
+
 </head>
 <body>
 
@@ -34,43 +38,6 @@
     </button>
   </form>
 
-  <script>
-    const { ipcRenderer } = require('electron');
-
-    const form = document.querySelector('form');
-    addEventListener('submit', e => {
-      /* Esta wea es para convertir de datetime-local a date :p
-       además de generar un objeto, con los datos originales
-       y los datos en formato Date */
-      function convertDateType(date) {
-        let year = date.slice(0, 4);
-        let month = date.slice(5, 7) - 1;
-        let day = date.slice(8, 10);
-        let hour = date.slice(11, 13);
-        let minute = date.slice(14, 16); 
-         
-        let actualDate = new Date(year, month, day, hour, minute);
-        return actualDate;
-      }
-
-      const nameTask = document.querySelector('#name').value;
-      const subjTask = document.querySelector('#subject').value;
-      const descTask = document.querySelector('#description').value;
-      const dateTask = convertDateType(document.querySelector('#date').value);
-
-      const newTask = {
-        name: nameTask,
-        subject: subjTask,
-        description: descTask,
-        date: dateTask
-      }
-
-      ipcRenderer.send('task:new', newTask);
-
-      e.preventDefault();
-    });
-
-  </script>
   
 </body>
 </html>
