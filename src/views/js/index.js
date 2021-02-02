@@ -27,7 +27,15 @@ ipcRenderer.on('new:task', (e, newTask) => {
 
   tasks.innerHTML += taskTemplate;
 
+  // BORRAR XD
+  const btns = document.querySelectorAll('.btn.btn-danger');
+  btns.forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.target.parentElement.parentElement.parentElement.remove();
+    });
+  });
 });
+
 
 // Borrar
 const btns = document.querySelectorAll('.btn.btn-danger');
