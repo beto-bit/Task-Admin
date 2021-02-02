@@ -39,6 +39,7 @@ app.on('ready', () => {
 function createNewTaskWindow() {
   // Inicializar
   newTaskWindow = new BrowserWindow ({
+    icon: path.join(__dirname, 'icons/new-task-icon.png'),
     width: 400,
     height: 430, 
     show: false,
