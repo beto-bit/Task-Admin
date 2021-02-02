@@ -89,15 +89,17 @@ app.on('ready', () => {
 });
 
 
-// Recibir y Enviar Información
-ipcMain.on('task:new', (e, newTask) => {
+// Manejo de DATOS
+ipcMain.on('task:new', (e, newTask) => {  
+  // Guardar Datos
+  let ID = nextId().toString();
+  newTask.id = ID;
+  store.set(`tasks.${ID}`, newTask);
+
   // Enviar a index.html
   mainWindow.webContents.send('new:task', newTask);
   newTaskWindow.close();
 
-  // Guardar Datos
-  let ID = nextId().toString();
-  store.set(`tasks.${ID}`, newTask);
 });
 
 

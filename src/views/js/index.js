@@ -26,32 +26,29 @@ ipcRenderer.on('new:task', (e, newTask) => {
   const taskTemplate = newTaskTemplate(newTask);
 
   tasks.innerHTML += taskTemplate;
+  deleteTask();
+});
 
-  // BORRAR XD
+
+// Borrar
+deleteTask();
+
+function deleteTask() {
   const btns = document.querySelectorAll('.btn.btn-danger');
   btns.forEach(btn => {
     btn.addEventListener('click', e => {
       e.target.parentElement.parentElement.parentElement.remove();
     });
   });
-});
+}
 
-
-// Borrar
-const btns = document.querySelectorAll('.btn.btn-danger');
-btns.forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.target.parentElement.parentElement.parentElement.remove();
-  });
-});
 
 // Tarjeta HTML
-
 function newTaskTemplate(newTask) {
   let presentableDate = `${newTask.date.getDate()} de ${month(newTask.date.getMonth())} de ${newTask.date.getFullYear()}`;
 
   return `
-    <div class="p-2">
+    <div class="p-2" id="t${newTask.id}">
     <div class="card text-center p-1">
         <div class="card-header">
           <h5 class="card-title">${newTask.name}</h5>
