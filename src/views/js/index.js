@@ -37,6 +37,9 @@ function deleteTask() {
   const btns = document.querySelectorAll('.btn.btn-danger');
   btns.forEach(btn => {
     btn.addEventListener('click', e => {
+      let taskID = e.target.parentNode.parentNode.parentNode.id;
+      taskID = taskID.slice(1);
+      store.delete(`tasks.${taskID}`);
       e.target.parentElement.parentElement.parentElement.remove();
     });
   });
