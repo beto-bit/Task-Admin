@@ -11,7 +11,6 @@ let store = new Store({
     default: 0
   }
 });
-store.path = path.join(__dirname, '/data/data.json');
 
 
 // Función de ID
