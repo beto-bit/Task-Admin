@@ -58,7 +58,9 @@ function newTaskTemplate(newTask) {
         <div class="card-body">
           ${newTask.subject}
           <hr>
-          ${newTask.description}
+          <div style="max-width: 150px; margin: auto;">
+            ${newTask.description}
+          </div>
           <hr>
           ${presentableDate}
           <hr>
