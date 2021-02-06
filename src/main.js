@@ -11,7 +11,6 @@ let store = new Store({
     default: 0
   }
 });
-store.path = path.join(__dirname, '/data/data.json');
 
 
 // Función de ID
@@ -33,7 +32,7 @@ let newTaskWindow;
 function createMainWindow() {
   // Propiedades
   mainWindow = new BrowserWindow({
-    icon: path.join(__dirname, '/icons/icon.png'),
+    icon: path.join(__dirname, '/icons/icon_light.png'),
     show: false,
     webPreferences: { nodeIntegration: true }
   });
@@ -61,7 +60,7 @@ function createMainWindow() {
 function createNewTaskWindow() {
   // Propiedades
   newTaskWindow = new BrowserWindow ({
-    icon: path.join(__dirname, 'icons/new-task-icon.png'),
+    icon: path.join(__dirname, 'icons/new_task_light.png'),
     width: 400,
     height: 430, 
     show: false,
@@ -138,7 +137,6 @@ const templateMenu = [
 if (process.env.NODE_ENV !== 'production') {
   require('electron-reload')(__dirname, {
     electron: path.join(__dirname, '../node-modules', '.bin', 'electron'),
-    ignored: /data\/|[/\\]\./ // Archivos de Guardado
   });
 }
 

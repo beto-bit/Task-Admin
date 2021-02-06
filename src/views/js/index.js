@@ -5,7 +5,6 @@ const path = require('path');
 
 // Inicializar Store y Obtener Datos
 let store = new Store();
-store.path = path.join(__dirname, '../data/data.json');
 let storedTasks = store.get('tasks');
 
 
