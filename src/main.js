@@ -116,10 +116,33 @@ const templateMenu = [
         click() {
           createNewTaskWindow();
         }
-      }, // TODO: poner el borrón de Unde y Redo antes que el de 'Remover Tod0'
+      }, 
 
+      // Separador
       { type: 'separator' },
-      
+
+      // Tema de Color
+      {
+        label: 'Tema de Color',
+        submenu: [
+          // Light Theme
+          {label: 'Tema Claro'},
+
+          // Dark Theme
+          {label: 'Tema Oscuro'},
+
+          // Cyborg Theme
+          {label: 'Tema Cyborg'},
+
+          // Solarized Theme
+          {label: 'Tema Solarizado'}
+
+        ]
+      },
+
+      // Separador
+      { type: 'separator' },
+
       // Salida
       {
         label: 'Salir',

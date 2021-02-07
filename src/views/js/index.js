@@ -1,7 +1,6 @@
 const tasks = document.querySelector('#tasks');
 const { ipcRenderer } = require('electron');
 const Store = require('electron-store');
-const path = require('path');
 
 // Inicializar Store y Obtener Datos
 let store = new Store();
