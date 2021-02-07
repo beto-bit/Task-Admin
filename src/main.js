@@ -170,14 +170,14 @@ const templateMenu = [
 
 
 // Hot reload
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === "development") {
   require('electron-reload')(__dirname, {
     electron: path.join(__dirname, '../node-modules', '.bin', 'electron'),
   });
 }
 
 // DevTools
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === "development") {
   templateMenu.push({
     label: 'DevTools',
     submenu: [
