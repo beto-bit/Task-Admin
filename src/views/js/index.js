@@ -7,6 +7,11 @@ let store = new Store();
 let storedTasks = store.get('tasks');
 
 
+// Tema de Color
+let theme = document.getElementById('theme-link');
+theme.href = `css/${store.get('theme')}.css`
+
+
 // Cambiar formato de Fecha
 for (let stored in storedTasks) {
   storedTasks[stored].date = new Date(storedTasks[stored].date);

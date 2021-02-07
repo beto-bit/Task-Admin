@@ -9,6 +9,9 @@ let store = new Store({
     type: 'number',
     minimum: 0,
     default: 0
+  },
+  theme: {
+    type: 'string'
   }
 });
 
@@ -18,8 +21,21 @@ function nextId() {
   store.set('counter', store.get('counter') + 1);
   if (store.get('counter') === null) {
     store.set('counter', 0);
+    store.set('theme', 'light-theme');
   }
   return store.get('counter');
+}
+
+
+// Themes
+function toggleTheme(theme) {
+  let code = `
+  theme = document.getElementById('theme-link');
+  theme.href = "css/${theme}.css";
+  `;
+  mainWindow.webContents.executeJavaScript(code);
+
+  store.set('theme', theme);
 }
 
 
@@ -126,23 +142,20 @@ const templateMenu = [
         label: 'Tema de Color',
         submenu: [
           // Light Theme
-          {label: 'Tema Claro'},
-
+          { label: 'Tema Claro', click() { toggleTheme('light-theme'); } },
           // Dark Theme
-          {label: 'Tema Oscuro'},
-
+          {label: 'Tema Oscuro', click() { toggleTheme('dark-theme'); }},
           // Cyborg Theme
-          {label: 'Tema Cyborg'},
-
+          {label: 'Tema Cyborg', click() { toggleTheme('cyborg-theme'); }},
           // Solarized Theme
-          {label: 'Tema Solarizado'}
+          {label: 'Tema Solarizado', click() { toggleTheme('solar-theme'); }}
 
         ]
       },
 
       // Separador
       { type: 'separator' },
-
+      
       // Salida
       {
         label: 'Salir',

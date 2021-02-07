@@ -1,4 +1,14 @@
 const { ipcRenderer } = require('electron');
+const Store = require('electron-store');
+
+// Store
+let store = new Store();
+
+
+// Tema de Color
+const theme = document.getElementById('theme-link');
+theme.href = `css/${store.get('theme')}.css`;
+
 
 // Submit
 addEventListener('submit', e => {
