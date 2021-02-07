@@ -12,7 +12,8 @@ Para iniciar el proyecto en tu ordenador tienes que tener [Node](https://nodejs.
 2. Ejecuta el comando ```npm install```
 3. Ahora ejecuta el comando ```npm start```
 
-Eventualmente saldrá la versión distribuible, si quieres ver como hacerlo tú mismo puedes visitar [esto](https://www.npmjs.com/package/electron-packager).
+**¡Ahora hay versión [distribuible para win32 x64](https://github.com/beto-bit/Task-Admin/releases/tag/v1.1-alpha)!**
+Si quieres ver como hacerlo tú mismo puedes visitar [esto](https://www.npmjs.com/package/electron-packager).
 
 # 🖼 Imágenes
 ### Vista Principal
@@ -26,3 +27,4 @@ Cualquiera que esté dispuesto puede colaborar, como dije, este es un intento te
 y si esto va bien podría mantenerse (eventualmente) por la comunidad.
 
 ¡Gracias!
+Y especiales agradecimientos a Woshua por los íconos. 
