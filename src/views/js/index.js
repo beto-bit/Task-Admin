@@ -10,6 +10,7 @@ let storedTasks = store.get('tasks');
 // Tema de Color
 let theme = document.getElementById('theme-link');
 theme.href = `css/${store.get('theme')}.css`
+
 function themeLoad() {
   document.body.style.visibility = 'visible';
 }

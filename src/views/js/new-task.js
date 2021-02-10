@@ -9,6 +9,10 @@ let store = new Store();
 const theme = document.getElementById('theme-link');
 theme.href = `css/${store.get('theme')}.css`;
 
+function themeLoad() {
+  document.body.style.visibility = 'visible';
+}
+
 
 // Submit
 addEventListener('submit', e => {
