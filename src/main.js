@@ -30,8 +30,19 @@ function nextId() {
 // Themes
 function toggleTheme(theme) {
   let code = `
-  theme = document.getElementById('theme-link');
-  theme.href = "css/${theme}.css";
+  togglePromise = new Promise((resolve, reject) => {
+    document.body.style.display = 'none';
+    resolve();
+  });
+  togglePromise
+    .then(function changeStyle(response) {
+      theme = document.getElementById('theme-link');
+      theme.href = "css/${theme}.css";
+    })
+    .then(function showAgain(response) {
+      document.body.style.display = 'block';
+    })
+    .catch(function notOk(err) {console.error(err)} );
   `;
   mainWindow.webContents.executeJavaScript(code);
 
@@ -170,14 +181,14 @@ const templateMenu = [
 
 
 // Hot reload
-if (process.env.NODE_ENV === "development") {
+if (!(app.isPackaged)) {
   require('electron-reload')(__dirname, {
     electron: path.join(__dirname, '../node-modules', '.bin', 'electron'),
   });
 }
 
 // DevTools
-if (process.env.NODE_ENV === "development") {
+if (!(app.isPackaged)) {
   templateMenu.push({
     label: 'DevTools',
     submenu: [
