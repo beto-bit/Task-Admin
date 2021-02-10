@@ -12,7 +12,7 @@ Para iniciar el proyecto en tu ordenador tienes que tener [Node](https://nodejs.
 2. Ejecuta el comando ```npm install```
 3. Ahora ejecuta el comando ```npm start```
 
-**¡Ahora hay versión [distribuible para win32 x64](https://github.com/beto-bit/Task-Admin/releases/tag/v1.1-alpha)!**
+**¡Ahora hay versión [distribuible para win32 x64](https://github.com/beto-bit/Task-Admin/releases/tag/v1.1.1-alpha)!**
 Si quieres ver como hacerlo tú mismo puedes visitar [esto](https://www.npmjs.com/package/electron-packager).
 
 # 🖼 Imágenes
