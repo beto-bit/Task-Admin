@@ -20,7 +20,9 @@ Si quieres ver como hacerlo tú mismo puedes visitar [esto](https://www.npmjs.co
 ![Imágen de la Main Window](https://github.com/beto-bit/Task-Admin/blob/main/gh-images/mainwindow.png)
 
 ### Nueva Tarea
-![Imágen de Cuadro de Nueva Tarea](https://github.com/beto-bit/Task-Admin/blob/main/gh-images/nueva-tarea2.png)
+![Imágen de Cuadro de Nueva Tarea](https://github.com/beto-bit/Task-Admin/blob/main/gh-images/solarized-new-task.png)
+
+#### Ahora con nuevos Temas de Color: Claro, Oscuro, Cyborg y Solarizado
 
 # 📣 Colaboración
 Cualquiera que esté dispuesto puede colaborar, como dije, este es un intento temprano de hacer un proyecto OpenSource
